@@ -1,2 +1,20 @@
-template: Hello, %s!
-defaultName: Stranger
+logging:
+  level: INFO
+  appenders:
+    - type: console
+      #currentLogFilename: /logs/sellme.log
+      #archive: true
+      #archivedLogFilenamePattern: /logs/sellme-%d.log
+ 
+database:
+  # the name of your JDBC driver
+  driverClass: com.mysql.jdbc.Driver
+
+  # the username
+  user: root
+
+  # the password
+  password: root
+
+  # the JDBC URL
+  url: jdbc:mysql://localhost:3306/test

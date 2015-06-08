@@ -3,11 +3,11 @@
  */
 package com.sellme.core;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
 import io.dropwizard.Configuration;
+import io.dropwizard.db.DataSourceFactory;
 
-
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -16,10 +16,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  *
  */
 public class SellMeConfiguration extends Configuration {
-    @NotEmpty
+    @Valid
+    @NotNull
+    private DataSourceFactory database = new DataSourceFactory();
+    
+    @JsonProperty
+    public final DataSourceFactory getDatabase() {
+        return database;
+    }
+
+    public final void setDatabase(DataSourceFactory database) {
+        this.database = database;
+    }
+
     private String template;
 
-    @NotEmpty
     private String defaultName = "Stranger";
 
     @JsonProperty

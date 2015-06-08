@@ -3,18 +3,34 @@
  */
 package com.sellme.core;
 
-import com.sellme.resource.LoginResource;
+import javax.sql.DataSource;
 
 import io.dropwizard.Application;
+import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+
+import org.skife.jdbi.v2.DBI;
+import org.skife.jdbi.v2.spring.DBIFactoryBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.sellme.dao.UserDAO;
+import com.sellme.resource.LoginResource;
+import com.sellme.resource.UserResource;
+import com.sellme.service.UserService;
 
 /**
  * @author Swapnil Singh
  *
  */
 public class SellMeApp extends Application<SellMeConfiguration> {
-
+    private static final Logger LOGGER = LoggerFactory.getLogger(SellMeApp.class);
+    private final DBIFactory dbiFactory = new DBIFactory();
+    private DBI jdbi;
+    private UserDAO userDAO;
+    private UserService userService;
     /**
      * The following method is an entry point for the SellMeApp.
      * 
@@ -42,10 +58,30 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      * io.dropwizard.setup.Environment)
      */
     @Override
-    public void run(SellMeConfiguration arg0, Environment environmanet)
+    public void run(SellMeConfiguration sellMeConfiguration, Environment environmanet)
             throws Exception {
-        //final LoginResource loginResource = new LoginResource();
-        environmanet.jersey().register(LoginResource.class);
+        environmanet.jersey().disable();
+        // Initializing Database Connection
+        this.jdbi = this.dbiFactory.build(environmanet, sellMeConfiguration.getDatabase(), "mysql");
+        initlizeDAO();
+        initlizeServices(sellMeConfiguration);
+        LOGGER.info("Initializing Resources.");
+        environmanet.jersey().register(new LoginResource());
+        environmanet.jersey().register(new UserResource(userService));
     }
 
+    /**
+     * The following method initializes all the Services.
+     * @param sellMeConfiguration
+     */
+    private void initlizeServices(SellMeConfiguration sellMeConfiguration) {
+        this.userService = new UserService(userDAO, sellMeConfiguration);
+    }
+
+    /**
+     * The following method will initialize all the DAOs 
+     */
+    private void initlizeDAO() {
+        this.userDAO = jdbi.onDemand(UserDAO.class);
+    }
 }
