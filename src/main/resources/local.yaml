@@ -1,4 +1,5 @@
 server:
+<<<<<<< HEAD
   applicationConnectors:
       - type: http
         port: 8080
@@ -6,6 +7,13 @@ server:
       - type: http
         port: 8081
 
+=======
+  type: simple
+  connector:
+    type: http
+    port: 8080
+    
+>>>>>>> 23b085d28e47cb02f9020acd58c74b74bdfb0ea4
 logging:
   level: INFO
   appenders:
