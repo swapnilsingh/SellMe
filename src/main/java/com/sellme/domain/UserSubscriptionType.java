@@ -11,7 +11,7 @@ public enum UserSubscriptionType {
 FREE(1),
 MONTHLY(2),
 QUATERLY(3),
-HALFYEARLY(4),
+HALF_YEARLY(4),
 ANNUAL(5);
 private int value;
 private UserSubscriptionType(int value){

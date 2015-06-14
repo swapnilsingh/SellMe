@@ -58,16 +58,15 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      * io.dropwizard.setup.Environment)
      */
     @Override
-    public void run(SellMeConfiguration sellMeConfiguration, Environment environmanet)
+    public void run(SellMeConfiguration sellMeConfiguration, Environment environment)
             throws Exception {
-        environmanet.jersey().disable();
         // Initializing Database Connection
-        this.jdbi = this.dbiFactory.build(environmanet, sellMeConfiguration.getDatabase(), "mysql");
+        this.jdbi = this.dbiFactory.build(environment, sellMeConfiguration.getDatabase(), "mysql");
         initlizeDAO();
         initlizeServices(sellMeConfiguration);
         LOGGER.info("Initializing Resources.");
-        environmanet.jersey().register(new LoginResource());
-        environmanet.jersey().register(new UserResource(userService));
+        environment.jersey().register(new LoginResource());
+        environment.jersey().register(new UserResource(userService));
     }
 
     /**

@@ -10,8 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import com.sellme.domain.Login;
-import com.sellme.domain.StatusBean;
 import com.sellme.domain.Status;
+import com.sellme.domain.StatusBean;
 
 /**
  * @author Swapnil Singh
