@@ -42,7 +42,7 @@ public class UserResource {
     @ApiOperation(value = "Accepts User JSON", notes = "Create User", response = StatusBean.class)
     @Consumes(MediaType.APPLICATION_JSON)
     public StatusBean createUser(@ApiParam User user){
-        LOGGER.info(user.toString());
+        userService.createUser(user);
         return new StatusBean();
     }
 }

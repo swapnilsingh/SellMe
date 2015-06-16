@@ -28,4 +28,7 @@ public static UserSubscriptionType getUserSubscriptionType(int value){
 	}
 	return userSubscriptionType;
 }
+public final int getValue() {
+    return value;
+}
 }

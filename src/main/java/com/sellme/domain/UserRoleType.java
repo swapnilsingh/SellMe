@@ -29,4 +29,7 @@ public static UserRoleType getUserRoleType(int value){
 	}
 	return userRoleType;
 }
+public final int getValue() {
+    return value;
+}
 }

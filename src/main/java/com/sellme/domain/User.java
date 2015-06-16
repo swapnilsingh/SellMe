@@ -3,6 +3,7 @@
  */
 package com.sellme.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -13,27 +14,43 @@ public class User {
 
     private String userId;
     private boolean userStatus;
-    private UserRoleType userRoleType;
-    private UserDetails userDetails;
+    private int userRoleType;
+    private String userName;
+    private String userAddress;
+    private int userSubscriptionType;
+    private String userEmail;
+    private String userMobile;
     
     /**
      * 
      */
     public User() {
     }
+    
     /**
      * @param userId
      * @param userStatus
      * @param userRoleType
-     * @param userDetails
+     * @param userName
+     * @param userAddress
+     * @param userSubscriptionType
+     * @param userEmail
+     * @param userMobile
      */
     public User(String userId, boolean userStatus, int userRoleType,
-            UserDetails userDetails) {
+            String userName, String userAddress,
+            int userSubscriptionType, String userEmail,
+            String userMobile) {
         this.userId = userId;
         this.userStatus = userStatus;
-        this.userRoleType = UserRoleType.getUserRoleType(userRoleType);
-        this.userDetails = userDetails;
+        this.userRoleType = UserRoleType.getUserRoleType(userRoleType).getValue();
+        this.userName = userName;
+        this.userAddress = userAddress;
+        this.userSubscriptionType = UserSubscriptionType.getUserSubscriptionType(userSubscriptionType).getValue();
+        this.userEmail = userEmail;
+        this.userMobile = userMobile;
     }
+
     @JsonProperty
     public final String getUserId() {
         return userId;
@@ -49,23 +66,68 @@ public class User {
         this.userStatus = userStatus;
     }
     @JsonProperty
-    public final UserRoleType getUserRoleType() {
+    public final int getUserRoleType() {
         return userRoleType;
     }
     public final void setUserRoleType(int userRoleType) {
-        this.userRoleType = UserRoleType.getUserRoleType(userRoleType);
+        this.userRoleType = UserRoleType.getUserRoleType(userRoleType).getValue();
     }
-    public final UserDetails getUserDetails() {
-        return userDetails;
+    @JsonProperty
+    public final String getUserName() {
+        return userName;
     }
-    public final void setUserDetails(UserDetails userDetails) {
-        this.userDetails = userDetails;
+
+    public final void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    @JsonProperty
+    public final String getUserAddress() {
+        return userAddress;
+    }
+
+    public final void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+
+    @JsonProperty
+    public final int getUserSubscriptionType() {
+        return userSubscriptionType;
+    }
+
+    public final void setUserSubscriptionType(int userSubscriptionType) {
+        this.userSubscriptionType = UserSubscriptionType
+                .getUserSubscriptionType(userSubscriptionType).getValue();
+    }
+
+    @JsonProperty
+    public final String getUserEmail() {
+        return userEmail;
+    }
+
+    public final void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
+
+    @JsonProperty
+    public final String getUserMobile() {
+        return userMobile;
+    }
+
+    public final void setUserMobile(String userMobile) {
+        this.userMobile = userMobile;
+    }
+    @JsonIgnore
+    public int getUserStatus(){
+        return isUserStatus()? 1 : 0;
     }
     @Override
     public String toString() {
         return "User [userId=" + userId + ", userStatus=" + userStatus
-                + ", userRoleType=" + userRoleType + ", userDetails="
-                + userDetails + "]";
+                + ", userRoleType=" + userRoleType + ", userName=" + userName
+                + ", userAddress=" + userAddress + ", userSubscriptionType="
+                + userSubscriptionType + ", userEmail=" + userEmail
+                + ", userMobile=" + userMobile + "]";
     }
     
 }
