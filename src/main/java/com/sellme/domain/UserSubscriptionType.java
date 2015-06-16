@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.domain;
 
 /**
@@ -18,7 +15,8 @@ private int value;
 private UserSubscriptionType(int value){
 	this.value = value;
 }
-private UserSubscriptionType(){}
+private UserSubscriptionType(){
+}
 public static UserSubscriptionType getUserSubscriptionType(int value){
 	UserSubscriptionType userSubscriptionType = UserSubscriptionType.UNKNOWN_USER_SUBSCRIPTION_TYPE;
 	for(UserSubscriptionType subscriptionType :values()){

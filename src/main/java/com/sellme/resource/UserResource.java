@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.resource;
 
 import javax.ws.rs.Consumes;
@@ -12,7 +9,6 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.sellme.dao.UserDAO;
 import com.sellme.domain.StatusBean;
 import com.sellme.domain.User;
 import com.sellme.service.UserService;
@@ -30,7 +26,7 @@ import com.wordnik.swagger.annotations.ApiParam;
 public class UserResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserResource.class);
     private UserService userService;
-    
+
     /**
      * @param userService
      */
@@ -42,6 +38,7 @@ public class UserResource {
     @ApiOperation(value = "Accepts User JSON", notes = "Create User", response = StatusBean.class)
     @Consumes(MediaType.APPLICATION_JSON)
     public StatusBean createUser(@ApiParam User user){
+        LOGGER.info("Calling UserService");
         userService.createUser(user);
         return new StatusBean();
     }

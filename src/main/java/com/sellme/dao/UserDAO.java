@@ -1,9 +1,5 @@
-/**
- * 
- */
 package com.sellme.dao;
 
-import org.skife.jdbi.v2.sqlobject.Bind;
 import org.skife.jdbi.v2.sqlobject.BindBean;
 import org.skife.jdbi.v2.sqlobject.SqlUpdate;
 
@@ -17,7 +13,7 @@ public interface UserDAO {
 
     /**
      * The following method will insert User into the database.
-     * 
+     *
      * @param userid
      * @param userRoleType
      * @param userStatus

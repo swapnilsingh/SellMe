@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.core;
 
 import io.dropwizard.Application;
@@ -31,7 +28,7 @@ public class SellMeApp extends Application<SellMeConfiguration> {
     private UserService userService;
     /**
      * The following method is an entry point for the SellMeApp.
-     * 
+     *
      * @param args
      * @throws Exception
      */
@@ -41,7 +38,7 @@ public class SellMeApp extends Application<SellMeConfiguration> {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see io.dropwizard.Application#initialize(io.dropwizard.setup.Bootstrap)
      */
     @Override
@@ -52,13 +49,13 @@ public class SellMeApp extends Application<SellMeConfiguration> {
 					SellMeConfiguration sellMeConfiguration) {
 				return sellMeConfiguration.swaggerBundleConfiguration;
 			}
-    		
+
 		});
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see io.dropwizard.Application#run(io.dropwizard.Configuration,
      * io.dropwizard.setup.Environment)
      */
@@ -68,22 +65,19 @@ public class SellMeApp extends Application<SellMeConfiguration> {
         // Initializing Database Connection
         this.jdbi = this.dbiFactory.build(environment, sellMeConfiguration.getDatabase(), "mysql");
         initlizeDAO();
-        initlizeServices(sellMeConfiguration);
+        initlizeServices();
         LOGGER.info("Initializing Resources.");
         environment.jersey().register(new LoginResource());
         environment.jersey().register(new UserResource(userService));
     }
 
-    /**
-     * The following method initializes all the Services.
-     * @param sellMeConfiguration
-     */
-    private void initlizeServices(SellMeConfiguration sellMeConfiguration) {
-        this.userService = new UserService(userDAO, sellMeConfiguration);
+
+    private void initlizeServices() {
+        this.userService = new UserService(userDAO);
     }
 
     /**
-     * The following method will initialize all the DAOs 
+     * The following method will initialize all the DAOs
      */
     private void initlizeDAO() {
         this.userDAO = jdbi.onDemand(UserDAO.class);

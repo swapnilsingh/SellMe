@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.domain;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,8 +10,8 @@ public class Login {
 
     private String userId;
     private String userPassword;
-    
-    
+
+
     @JsonProperty
     public final String getUserId() {
         return userId;
@@ -29,5 +26,10 @@ public class Login {
     public final void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     }
-    
+    @Override
+    public String toString() {
+        return "Login [userId=" + userId + ", userPassword=" + userPassword
+                + "]";
+    }
+
 }

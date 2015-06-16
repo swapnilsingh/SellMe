@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,36 +17,7 @@ public class User {
     private int userSubscriptionType;
     private String userEmail;
     private String userMobile;
-    
-    /**
-     * 
-     */
-    public User() {
-    }
-    
-    /**
-     * @param userId
-     * @param userStatus
-     * @param userRoleType
-     * @param userName
-     * @param userAddress
-     * @param userSubscriptionType
-     * @param userEmail
-     * @param userMobile
-     */
-    public User(String userId, boolean userStatus, int userRoleType,
-            String userName, String userAddress,
-            int userSubscriptionType, String userEmail,
-            String userMobile) {
-        this.userId = userId;
-        this.userStatus = userStatus;
-        this.userRoleType = UserRoleType.getUserRoleType(userRoleType).getValue();
-        this.userName = userName;
-        this.userAddress = userAddress;
-        this.userSubscriptionType = UserSubscriptionType.getUserSubscriptionType(userSubscriptionType).getValue();
-        this.userEmail = userEmail;
-        this.userMobile = userMobile;
-    }
+
 
     @JsonProperty
     public final String getUserId() {
@@ -129,5 +97,5 @@ public class User {
                 + userSubscriptionType + ", userEmail=" + userEmail
                 + ", userMobile=" + userMobile + "]";
     }
-    
+
 }

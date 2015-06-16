@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.sellme.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -19,7 +16,8 @@ private int value;
 private UserRoleType(int value){
 	this.value = value;
 }
-private UserRoleType(){}
+private UserRoleType(){
+}
 public static UserRoleType getUserRoleType(int value){
 	UserRoleType userRoleType = UserRoleType.UNKNOWN_USER_ROLE_TYPE;
 	for(UserRoleType roleType:values()){
