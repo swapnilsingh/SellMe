@@ -3,16 +3,14 @@
  */
 package com.sellme.core;
 
-import javax.sql.DataSource;
-
 import io.dropwizard.Application;
-import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 
 import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.spring.DBIFactoryBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,7 +46,14 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      */
     @Override
     public void initialize(Bootstrap<SellMeConfiguration> bootstrap) {
-        // nothing to do yet
+    	bootstrap.addBundle(new SwaggerBundle<SellMeConfiguration>() {
+			@Override
+			protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
+					SellMeConfiguration sellMeConfiguration) {
+				return sellMeConfiguration.swaggerBundleConfiguration;
+			}
+    		
+		});
     }
 
     /*

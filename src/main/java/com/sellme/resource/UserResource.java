@@ -16,12 +16,16 @@ import com.sellme.dao.UserDAO;
 import com.sellme.domain.StatusBean;
 import com.sellme.domain.User;
 import com.sellme.service.UserService;
+import com.wordnik.swagger.annotations.Api;
+import com.wordnik.swagger.annotations.ApiOperation;
+import com.wordnik.swagger.annotations.ApiParam;
 
 /**
  * @author Swapnil Singh
  *
  */
 @Path("/user")
+@Api(value="/user",description="The following endpoint exposes the methods which would perform User releated opreations.")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserResource.class);
@@ -35,8 +39,9 @@ public class UserResource {
     }
 
     @POST
+    @ApiOperation(value = "Accepts User JSON", notes = "Create User", response = StatusBean.class)
     @Consumes(MediaType.APPLICATION_JSON)
-    public StatusBean createUser(User user){
+    public StatusBean createUser(@ApiParam User user){
         LOGGER.info(user.toString());
         return new StatusBean();
     }

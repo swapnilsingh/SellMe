@@ -25,3 +25,5 @@ database:
 
   # the JDBC URL
   url: jdbc:mysql://localhost:3306/test
+swagger:
+  resourcePackage: com.sellme.resource

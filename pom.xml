@@ -8,6 +8,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<dropwizard.version>0.8.1</dropwizard.version>
 		<mysql.version>5.1.6</mysql.version>
+		<swaggerui.version>0.7.0</swaggerui.version>
 	</properties>
 	<build>
 		<plugins>
@@ -90,6 +91,10 @@
 			<artifactId>dropwizard-jdbi</artifactId>
 			<version>0.8.1</version>
 		</dependency>
-
+		<dependency>
+			<groupId>io.federecio</groupId>
+			<artifactId>dropwizard-swagger</artifactId>
+			<version>${swaggerui.version}</version>
+		</dependency>
 	</dependencies>
 </project>
