@@ -28,11 +28,11 @@ public class User {
      * @param userRoleType
      * @param userDetails
      */
-    public User(String userId, boolean userStatus, UserRoleType userRoleType,
+    public User(String userId, boolean userStatus, int userRoleType,
             UserDetails userDetails) {
         this.userId = userId;
         this.userStatus = userStatus;
-        this.userRoleType = userRoleType;
+        this.userRoleType = UserRoleType.getUserRoleType(userRoleType);
         this.userDetails = userDetails;
     }
     @JsonProperty
@@ -53,8 +53,8 @@ public class User {
     public final UserRoleType getUserRoleType() {
         return userRoleType;
     }
-    public final void setUserRoleType(UserRoleType userRoleType) {
-        this.userRoleType = userRoleType;
+    public final void setUserRoleType(int userRoleType) {
+        this.userRoleType = UserRoleType.getUserRoleType(userRoleType);
     }
     public final UserDetails getUserDetails() {
         return userDetails;

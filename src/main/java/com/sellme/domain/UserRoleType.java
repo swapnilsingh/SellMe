@@ -13,16 +13,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public enum UserRoleType {
 ADMIN(1),
 RETAILER(2),
-CUSTOMER(3);
+CUSTOMER(3),
+UNKNOWN_USER_ROLE_TYPE;
 private int value;
 private UserRoleType(int value){
-    setValue(value);
+	this.value = value;
 }
-public final int getValue() {
-    return value;
+private UserRoleType(){}
+public static UserRoleType getUserRoleType(int value){
+	UserRoleType userRoleType = UserRoleType.UNKNOWN_USER_ROLE_TYPE;
+	for(UserRoleType roleType:values()){
+		if(roleType.value==value){
+			userRoleType=roleType;
+		}
+	}
+	return userRoleType;
 }
-public final void setValue(int value) {
-    this.value = value;
-}
-
 }
