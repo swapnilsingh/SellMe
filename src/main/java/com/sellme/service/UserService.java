@@ -55,6 +55,12 @@ public class UserService {
         }
     }
 
+    /**
+     * The following method prepares the Create user violation message.
+     * @param user
+     * @param existingUser
+     * @return
+     */
     private String getFailureReason(User user, User existingUser) {
         if (user.getUserId().equalsIgnoreCase(existingUser.getUserId())) {
             return "UserId Already Exists.";
