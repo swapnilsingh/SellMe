@@ -6,5 +6,8 @@
   "userAddress": "Satna",
   "userSubscriptionType": 1,
   "userEmail": "somemail@somedomain.com",
-  "userMobile": 8951013723
+  "userMobile": 8951013723,
+  "country": 84,
+  "state": 8414,
+  "cityOrTown": 84149
 }

@@ -20,6 +20,9 @@ public class User {
     private int userSubscriptionType;
     private String userEmail;
     private String userMobile;
+    private long state;
+    private long cityOrTown;
+    private int country;
 
     @JsonProperty
     public final String getUserId() {
@@ -93,6 +96,30 @@ public class User {
 
     public final void setUserMobile(String userMobile) {
         this.userMobile = userMobile;
+    }
+    @JsonProperty
+    public final long getState() {
+        return state;
+    }
+
+    public final void setState(long state) {
+        this.state = State.getStateType(state).getStateCode();
+    }
+    @JsonProperty
+    public final long getCityOrTown() {
+        return cityOrTown;
+    }
+
+    public final void setCityOrTown(long cityOrTown) {
+        this.cityOrTown = CityOrTown.getCityOrTownType(cityOrTown).getCityOrTownCode();
+    }
+    @JsonProperty
+    public final int getCountry() {
+        return country;
+    }
+
+    public final void setCountry(int country) {
+        this.country = Country.getCountryType(country).getCountryCode();
     }
 
     @JsonIgnore

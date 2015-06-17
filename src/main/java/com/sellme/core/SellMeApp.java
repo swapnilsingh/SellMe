@@ -14,9 +14,11 @@ import org.skife.jdbi.v2.DBI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.sellme.dao.LoginDAO;
 import com.sellme.dao.UserDAO;
 import com.sellme.resource.LoginResource;
 import com.sellme.resource.UserResource;
+import com.sellme.service.LoginService;
 import com.sellme.service.UserService;
 
 /**
@@ -29,7 +31,9 @@ public class SellMeApp extends Application<SellMeConfiguration> {
     private final DBIFactory dbiFactory = new DBIFactory();
     private DBI jdbi;
     private UserDAO userDAO;
+    private LoginDAO loginDAO;
     private UserService userService;
+    private LoginService loginService;
 
     /**
      * The following method is an entry point for the SellMeApp.
@@ -73,12 +77,13 @@ public class SellMeApp extends Application<SellMeConfiguration> {
         initlizeDAO();
         initlizeServices();
         LOGGER.info("Initializing Resources.");
-        environment.jersey().register(new LoginResource());
+        environment.jersey().register(new LoginResource(loginService));
         environment.jersey().register(new UserResource(userService));
     }
 
     private void initlizeServices() {
         this.userService = new UserService(userDAO);
+        this.loginService = new LoginService(loginDAO);
     }
 
     /**
@@ -86,5 +91,6 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      */
     private void initlizeDAO() {
         this.userDAO = jdbi.onDemand(UserDAO.class);
+        this.loginDAO = jdbi.onDemand(LoginDAO.class);
     }
 }

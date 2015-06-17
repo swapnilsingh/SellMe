@@ -34,8 +34,7 @@ public class Login {
 
     @Override
     public String toString() {
-        return "Login [userId=" + userId + ", userPassword=" + userPassword
-                + "]";
+        return "Login [userId=" + userId + "]";
     }
 
 }

@@ -35,6 +35,9 @@ public class UserMapper implements ResultSetMapper<User> {
         user.setUserSubscriptionType(resultSet.getInt("user_subscription_type"));
         user.setUserEmail(resultSet.getString("user_email"));
         user.setUserMobile(resultSet.getString("user_mobile"));
+        user.setCountry(resultSet.getInt("user_country"));
+        user.setState(resultSet.getLong("user_state"));
+        user.setCityOrTown(resultSet.getLong("user_city_town"));
         return user;
     }
 
