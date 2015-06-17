@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.sellme.domain;
 
@@ -8,6 +8,5 @@ package com.sellme.domain;
  *
  */
 public enum Status {
-    SUCCESSFUL,
-    UNSUCCESSFUL;
+    SUCCESSFUL, UNSUCCESSFUL;
 }

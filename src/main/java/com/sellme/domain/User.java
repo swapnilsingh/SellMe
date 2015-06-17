@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.sellme.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,28 +21,34 @@ public class User {
     private String userEmail;
     private String userMobile;
 
-
     @JsonProperty
     public final String getUserId() {
         return userId;
     }
+
     public final void setUserId(String userId) {
         this.userId = userId;
     }
+
     @JsonProperty
     public final boolean isUserStatus() {
         return userStatus;
     }
+
     public final void setUserStatus(boolean userStatus) {
         this.userStatus = userStatus;
     }
+
     @JsonProperty
     public final int getUserRoleType() {
         return userRoleType;
     }
+
     public final void setUserRoleType(int userRoleType) {
-        this.userRoleType = UserRoleType.getUserRoleType(userRoleType).getValue();
+        this.userRoleType = UserRoleType.getUserRoleType(userRoleType)
+                .getValue();
     }
+
     @JsonProperty
     public final String getUserName() {
         return userName;
@@ -85,10 +94,12 @@ public class User {
     public final void setUserMobile(String userMobile) {
         this.userMobile = userMobile;
     }
+
     @JsonIgnore
-    public int getUserStatus(){
-        return isUserStatus()? 1 : 0;
+    public int getUserStatus() {
+        return isUserStatus() ? 1 : 0;
     }
+
     @Override
     public String toString() {
         return "User [userId=" + userId + ", userStatus=" + userStatus

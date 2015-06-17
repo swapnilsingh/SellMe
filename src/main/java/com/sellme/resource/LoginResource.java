@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.sellme.resource;
 
 import javax.ws.rs.Consumes;
@@ -21,11 +24,12 @@ import com.wordnik.swagger.annotations.ApiParam;
  *
  */
 @Path("/sell-me")
-@Api(value="/sell-me",description="The following endpoint will expose the methods will perform login related opreations")
+@Api(value = "/sell-me", description = "The following endpoint will expose the methods will perform login related opreations")
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LoginResource.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(LoginResource.class);
 
     @Path("/login")
     @POST

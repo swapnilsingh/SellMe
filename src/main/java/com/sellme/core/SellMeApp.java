@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.sellme.core;
 
 import io.dropwizard.Application;
@@ -21,11 +24,13 @@ import com.sellme.service.UserService;
  *
  */
 public class SellMeApp extends Application<SellMeConfiguration> {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SellMeApp.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(SellMeApp.class);
     private final DBIFactory dbiFactory = new DBIFactory();
     private DBI jdbi;
     private UserDAO userDAO;
     private UserService userService;
+
     /**
      * The following method is an entry point for the SellMeApp.
      *
@@ -43,14 +48,14 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      */
     @Override
     public void initialize(Bootstrap<SellMeConfiguration> bootstrap) {
-    	bootstrap.addBundle(new SwaggerBundle<SellMeConfiguration>() {
-			@Override
-			protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
-					SellMeConfiguration sellMeConfiguration) {
-				return sellMeConfiguration.swaggerBundleConfiguration;
-			}
+        bootstrap.addBundle(new SwaggerBundle<SellMeConfiguration>() {
+            @Override
+            protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(
+                    SellMeConfiguration sellMeConfiguration) {
+                return sellMeConfiguration.swaggerBundleConfiguration;
+            }
 
-		});
+        });
     }
 
     /*
@@ -60,17 +65,17 @@ public class SellMeApp extends Application<SellMeConfiguration> {
      * io.dropwizard.setup.Environment)
      */
     @Override
-    public void run(SellMeConfiguration sellMeConfiguration, Environment environment)
-            throws Exception {
+    public void run(SellMeConfiguration sellMeConfiguration,
+            Environment environment) throws Exception {
         // Initializing Database Connection
-        this.jdbi = this.dbiFactory.build(environment, sellMeConfiguration.getDatabase(), "mysql");
+        this.jdbi = this.dbiFactory.build(environment,
+                sellMeConfiguration.getDatabase(), "mysql");
         initlizeDAO();
         initlizeServices();
         LOGGER.info("Initializing Resources.");
         environment.jersey().register(new LoginResource());
         environment.jersey().register(new UserResource(userService));
     }
-
 
     private void initlizeServices() {
         this.userService = new UserService(userDAO);

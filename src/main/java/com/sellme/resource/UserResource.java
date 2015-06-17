@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.sellme.resource;
 
 import javax.ws.rs.Consumes;
@@ -21,10 +24,11 @@ import com.wordnik.swagger.annotations.ApiParam;
  *
  */
 @Path("/user")
-@Api(value="/user",description="The following endpoint exposes the methods which would perform User releated opreations.")
+@Api(value = "/user", description = "The following endpoint exposes the methods which would perform User releated opreations.")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserResource.class);
+    private static final Logger LOGGER = LoggerFactory
+            .getLogger(UserResource.class);
     private UserService userService;
 
     /**
@@ -37,9 +41,8 @@ public class UserResource {
     @POST
     @ApiOperation(value = "Accepts User JSON", notes = "Create User", response = StatusBean.class)
     @Consumes(MediaType.APPLICATION_JSON)
-    public StatusBean createUser(@ApiParam User user){
+    public StatusBean createUser(@ApiParam User user) {
         LOGGER.info("Calling UserService");
-        userService.createUser(user);
-        return new StatusBean();
+        return userService.createUser(user);
     }
 }

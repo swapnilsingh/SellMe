@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.sellme.domain;
 
@@ -13,12 +13,13 @@ public class StatusBean {
 
     private String message;
     private Status status;
-    
+
     /**
-     * 
+     *
      */
     public StatusBean() {
     }
+
     /**
      * @param message
      * @param status
@@ -27,18 +28,28 @@ public class StatusBean {
         this.message = message;
         this.status = status;
     }
+
     @JsonProperty
     public final String getMessage() {
         return message;
     }
+
     public final void setMessage(String message) {
         this.message = message;
     }
+
     @JsonProperty
     public final Status getStatus() {
         return status;
     }
+
     public final void setStatus(Status status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return "StatusBean [message=" + message + ", status=" + status + "]";
+    }
+
 }
