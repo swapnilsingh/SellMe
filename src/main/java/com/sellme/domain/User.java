@@ -23,6 +23,7 @@ public class User {
     private long state;
     private long cityOrTown;
     private int country;
+    private String password;
 
     @JsonProperty
     public final String getUserId() {
@@ -122,11 +123,19 @@ public class User {
         this.country = Country.getCountryType(country).getCountryCode();
     }
 
+    @JsonProperty
+    public final String getPassword() {
+        return password;
+    }
+
+    public final void setPassword(String password) {
+        this.password = password;
+    }
+
     @JsonIgnore
     public int getUserStatus() {
         return isUserStatus() ? 1 : 0;
     }
-
     @Override
     public String toString() {
         return "User [userId=" + userId + ", userStatus=" + userStatus

@@ -12,6 +12,7 @@ import com.sellme.dao.UserDAO;
 import com.sellme.domain.Status;
 import com.sellme.domain.StatusBean;
 import com.sellme.domain.User;
+import com.sellme.util.PasswordEncryptorUtil;
 
 /**
  * @author Swapnil Singh
@@ -43,6 +44,7 @@ public class UserService {
                 .getUserByUserIdOrMobileNumberOrEmail(user);
         if (existingUser.isEmpty()) {
             this.userDAO.createUser(user);
+            this.userDAO.createLogin(user.getUserId(),PasswordEncryptorUtil.encrypt(user.getPassword()),true,"Session Token");
             statusBean.setStatus(Status.SUCCESSFUL);
             statusBean.setMessage("User Created Successfully");
             LOGGER.info(statusBean.toString());

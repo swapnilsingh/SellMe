@@ -1,13 +1,14 @@
 {
-  "userId": "ankurk",
+  "userId": "testuser",
   "userStatus": 1,
   "userRoleType": 2,
-  "userName": "Ankur Khendelwal",
+  "userName": "Test User",
   "userAddress": "Satna",
   "userSubscriptionType": 1,
   "userEmail": "somemail@somedomain.com",
-  "userMobile": 8951013723,
+  "userMobile": 1234567890,
   "country": 84,
   "state": 8414,
-  "cityOrTown": 84149
+  "cityOrTown": 84149,
+  "password": "password"
 }
