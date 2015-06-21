@@ -19,7 +19,7 @@ public class UserMapper implements ResultSetMapper<User> {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see org.skife.jdbi.v2.tweak.ResultSetMapper#map(int, java.sql.ResultSet,
      * org.skife.jdbi.v2.StatementContext)
      */

@@ -47,7 +47,7 @@ public class SellMeApp extends Application<SellMeConfiguration> {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see io.dropwizard.Application#initialize(io.dropwizard.setup.Bootstrap)
      */
     @Override
@@ -64,7 +64,7 @@ public class SellMeApp extends Application<SellMeConfiguration> {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see io.dropwizard.Application#run(io.dropwizard.Configuration,
      * io.dropwizard.setup.Environment)
      */

@@ -22,13 +22,16 @@ public interface UserDAO {
 
     /**
      * The following method inserts User JSON into the database.
+     * 
      * @param user
      */
     @SqlUpdate("INSERT INTO sellme_db.user_master (user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile,user_country,user_state,user_city_town) VALUES (:userId, :userRoleType, :userStatus, :userName, :userAddress, :userSubscriptionType, :userEmail, :userMobile,:country,:state,:cityOrTown);")
     void createUser(@BindBean User user);
 
     /**
-     * The following method will return the existing user for the passed parameters.
+     * The following method will return the existing user for the passed
+     * parameters.
+     * 
      * @param user
      * @return
      */
@@ -40,6 +43,9 @@ public interface UserDAO {
      * @param login
      */
     @SqlUpdate("INSERT INTO sellme_db.login (user_id,user_password,user_login_status,user_session_token) VALUES ( :userId , :password , :loginStatus , :sessionToken )")
-    void createLogin(@Bind("userId") String userId,@Bind("password") String password,@Bind("loginStatus") boolean loginStatus,@Bind("sessionToken") String sessionToken);
+    void createLogin(@Bind("userId") String userId,
+            @Bind("password") String password,
+            @Bind("loginStatus") boolean loginStatus,
+            @Bind("sessionToken") String sessionToken);
 
 }

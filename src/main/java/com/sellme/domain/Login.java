@@ -3,6 +3,7 @@
  */
 package com.sellme.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -13,6 +14,8 @@ public class Login {
 
     private String userId;
     private String userPassword;
+    private int loginStatus;
+    private String sessionToken;
 
     @JsonProperty
     public final String getUserId() {
@@ -30,6 +33,24 @@ public class Login {
 
     public final void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
+    }
+
+    @JsonIgnore
+    public int getLoginStatus() {
+        return loginStatus;
+    }
+
+    public void setLoginStatus(int loginStatus) {
+        this.loginStatus = loginStatus;
+    }
+
+    @JsonProperty
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
     }
 
     @Override

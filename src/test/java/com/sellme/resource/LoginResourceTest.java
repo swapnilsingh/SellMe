@@ -5,7 +5,6 @@ package com.sellme.resource;
 
 import org.junit.Test;
 
-
 /**
  * @author Swapnil Singh
  *

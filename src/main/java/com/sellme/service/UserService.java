@@ -44,7 +44,9 @@ public class UserService {
                 .getUserByUserIdOrMobileNumberOrEmail(user);
         if (existingUser.isEmpty()) {
             this.userDAO.createUser(user);
-            this.userDAO.createLogin(user.getUserId(),PasswordEncryptorUtil.encrypt(user.getPassword()),true,"Session Token");
+            this.userDAO.createLogin(user.getUserId(),
+                    PasswordEncryptorUtil.encrypt(user.getPassword()), true,
+                    "Session Token");
             statusBean.setStatus(Status.SUCCESSFUL);
             statusBean.setMessage("User Created Successfully");
             LOGGER.info(statusBean.toString());
@@ -59,6 +61,7 @@ public class UserService {
 
     /**
      * The following method prepares the Create user violation message.
+     * 
      * @param user
      * @param existingUser
      * @return

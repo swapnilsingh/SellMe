@@ -98,6 +98,7 @@ public class User {
     public final void setUserMobile(String userMobile) {
         this.userMobile = userMobile;
     }
+
     @JsonProperty
     public final long getState() {
         return state;
@@ -106,14 +107,17 @@ public class User {
     public final void setState(long state) {
         this.state = State.getStateType(state).getStateCode();
     }
+
     @JsonProperty
     public final long getCityOrTown() {
         return cityOrTown;
     }
 
     public final void setCityOrTown(long cityOrTown) {
-        this.cityOrTown = CityOrTown.getCityOrTownType(cityOrTown).getCityOrTownCode();
+        this.cityOrTown = CityOrTown.getCityOrTownType(cityOrTown)
+                .getCityOrTownCode();
     }
+
     @JsonProperty
     public final int getCountry() {
         return country;
@@ -136,6 +140,7 @@ public class User {
     public int getUserStatus() {
         return isUserStatus() ? 1 : 0;
     }
+
     @Override
     public String toString() {
         return "User [userId=" + userId + ", userStatus=" + userStatus
