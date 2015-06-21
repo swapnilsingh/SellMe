@@ -4,6 +4,7 @@
 package com.sellme.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,11 +12,13 @@ import org.slf4j.LoggerFactory;
 
 import com.sellme.dao.LoginDAO;
 import com.sellme.domain.Login;
+import com.sellme.domain.LoginBeacon;
 import com.sellme.domain.LoginStatus;
 import com.sellme.domain.Status;
 import com.sellme.domain.StatusBean;
 import com.sellme.interfaces.Validator;
 import com.sellme.util.LoginStatusBeanFactory;
+import com.sellme.util.PasswordEncryptorUtil;
 import com.sellme.validators.UserCredentialsValidator;
 import com.sellme.validators.UserExistanceValidator;
 import com.sellme.validators.UserLoginStatusAndSessionTokenValidator;
@@ -41,7 +44,7 @@ public class LoginService {
         this.loginDAO = loginDAO;
     }
 
-    public StatusBean userLogin(Login login) {
+    private StatusBean userLogin(Login login) {
         StatusBean statusBean = null;
         List<Login> loginDetailsInDb = loginDAO.getLoginDetailsByUserId(login
                 .getUserId());
@@ -80,9 +83,41 @@ public class LoginService {
         return statusBean;
     }
 
+    public LoginBeacon getLoginBeacon(Login login) {
+        LoginBeacon loginBecon = new LoginBeacon();
+        loginBecon.setStatusBean(userLogin(login));
+        if(loginBecon.getStatusBean().getStatus()== Status.SUCCESSFUL){
+            loginBecon.setSessionToken(PasswordEncryptorUtil.encrypt(new Date()
+            .toString()));
+        }
+        return loginBecon;
+    }
+
     private Login getExistingLogin(List<Login> loginDetailsInDb) {
         return !loginDetailsInDb.isEmpty() ? loginDetailsInDb
                 .get(FIRST_ELEMENT) : null;
+    }
+
+    /**
+     * @param userId
+     * @param sessionToken
+     * @return
+     */
+    public StatusBean userLogout(String userId, String sessionToken) {
+        StatusBean statusBean = new StatusBean();
+        statusBean.setMessage("Logout Error due to curropt data transmission.");
+        statusBean.setStatus(Status.UNSUCCESSFUL);
+        List<Login> loginDetailsInDb = loginDAO.getLoginDetailsByUserId(userId);
+        Login existingLoginDetails = getExistingLogin(loginDetailsInDb);
+        if (existingLoginDetails != null
+                && existingLoginDetails.getUserId().equalsIgnoreCase(userId)
+                && existingLoginDetails.getSessionToken().equalsIgnoreCase(
+                        sessionToken)) {
+            this.loginDAO.logout(userId, sessionToken,"");
+            statusBean.setMessage("Successfully Logged Out!");
+            statusBean.setStatus(Status.SUCCESSFUL);
+        }
+        return statusBean;
     }
 
 }

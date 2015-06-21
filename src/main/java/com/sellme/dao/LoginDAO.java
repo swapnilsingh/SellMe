@@ -33,4 +33,11 @@ public interface LoginDAO {
     public void signInUser(@Bind("userId") String userId,
             @Bind("sessionToken") String sessionToken);
 
+    /**
+     * @param userId
+     * @param sessionToken
+     */
+    @SqlUpdate("UPDATE sellme_db.login SET user_login_status=0, user_session_token = :emptyString WHERE user_id=:userId AND user_session_token=:sessionToken ")
+    public void logout(@Bind("userId") String userId,@Bind("sessionToken") String sessionToken,@Bind("emptyString") String emptyString);
+
 }

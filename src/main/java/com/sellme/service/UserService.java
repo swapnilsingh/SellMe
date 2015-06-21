@@ -3,6 +3,7 @@
  */
 package com.sellme.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -46,7 +47,7 @@ public class UserService {
             this.userDAO.createUser(user);
             this.userDAO.createLogin(user.getUserId(),
                     PasswordEncryptorUtil.encrypt(user.getPassword()), true,
-                    "Session Token");
+                    PasswordEncryptorUtil.encrypt(new Date().toString()));
             statusBean.setStatus(Status.SUCCESSFUL);
             statusBean.setMessage("User Created Successfully");
             LOGGER.info(statusBean.toString());
