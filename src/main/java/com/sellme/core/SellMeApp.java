@@ -83,7 +83,7 @@ public class SellMeApp extends Application<SellMeConfiguration> {
 
     private void initlizeServices() {
         this.userService = new UserService(userDAO);
-        this.loginService = new LoginService(loginDAO);
+        this.loginService = new LoginService(loginDAO,userDAO);
     }
 
     /**

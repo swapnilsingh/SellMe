@@ -1,0 +1,1 @@
+java -jar -Xdebug -agentlib:jdwp=transport=dt_socket,address=8787,server=y,suspend=n -jar target/SellMe-0.0.1-SNAPSHOT.jar server src/main/resources/local.yaml

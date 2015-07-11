@@ -6,6 +6,7 @@ package com.sellme.validators;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.google.common.base.Strings;
 import com.sellme.domain.Login;
 import com.sellme.domain.LoginStatus;
 import com.sellme.domain.StatusBean;
@@ -40,23 +41,18 @@ public class UserLoginStatusAndSessionTokenValidator implements Validator {
      */
     @Override
     public StatusBean validate() {
-        if (this.existingLogin.getLoginStatus() == 1
-                && !login.getSessionToken().equalsIgnoreCase(
-                        existingLogin.getSessionToken())) {
+        if(isUserLoggedIn()){
+            return null;            
+        }else{
             LOGGER.warn("User already logged in some other device.");
             return LoginStatusBeanFactory
                     .getStatusBean(LoginStatus.USER_ALREADY_LOGGED_IN);
-        } else if ((this.existingLogin.getLoginStatus() == 1 || this.existingLogin
-                .getLoginStatus() != 1)
-                && (login.getSessionToken().equalsIgnoreCase(
-                        existingLogin.getSessionToken()) || existingLogin
-                        .getSessionToken() == null)) {
-            LOGGER.info("User [" + this.login.getUserId()
-                    + "] successfully logged in..");
-            return LoginStatusBeanFactory
-                    .getStatusBean(LoginStatus.USER_SUCCESSFULLY_LOGGED_IN);
         }
-        return null;
+    }
+
+    private boolean isUserLoggedIn() {
+        boolean isCurrentUserSessionTokenValid = Strings.isNullOrEmpty(this.login.getSessionToken()) && Strings.isNullOrEmpty(this.existingLogin.getSessionToken()) && this.existingLogin.getLoginStatus() != 1;
+        return isCurrentUserSessionTokenValid ||(this.existingLogin.getLoginStatus() == 1) && (login.getSessionToken().equalsIgnoreCase(existingLogin.getSessionToken()));
     }
 
 }

@@ -14,6 +14,7 @@ public class Login {
 
     private String userId;
     private String userPassword;
+    private int userRole;
     private int loginStatus;
     private String sessionToken;
 
@@ -51,6 +52,15 @@ public class Login {
 
     public void setSessionToken(String sessionToken) {
         this.sessionToken = sessionToken;
+    }
+
+    @JsonProperty
+    public int getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(int userRole) {
+        this.userRole = userRole;
     }
 
     @Override

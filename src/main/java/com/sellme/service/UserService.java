@@ -44,6 +44,7 @@ public class UserService {
         List<User> existingUser = this.userDAO
                 .getUserByUserIdOrMobileNumberOrEmail(user);
         if (existingUser.isEmpty()) {
+            user.setUserSubscriptionDate();
             this.userDAO.createUser(user);
             this.userDAO.createLogin(user.getUserId(),
                     PasswordEncryptorUtil.encrypt(user.getPassword()), true,

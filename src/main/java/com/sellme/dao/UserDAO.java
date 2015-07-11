@@ -25,7 +25,7 @@ public interface UserDAO {
      * 
      * @param user
      */
-    @SqlUpdate("INSERT INTO sellme_db.user_master (user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile,user_country,user_state,user_city_town) VALUES (:userId, :userRoleType, :userStatus, :userName, :userAddress, :userSubscriptionType, :userEmail, :userMobile,:country,:state,:cityOrTown);")
+    @SqlUpdate("INSERT INTO sellme_db.user_master (user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile,user_country,user_state,user_city_town,user_creation_date, user_subscription_end_date) VALUES (:userId, :userRoleType, :userStatus, :userName, :userAddress, :userSubscriptionType, :userEmail, :userMobile,:country,:state,:cityOrTown,:userCreationDate,:userSubscriptionEndDate)")
     void createUser(@BindBean User user);
 
     /**
@@ -35,10 +35,21 @@ public interface UserDAO {
      * @param user
      * @return
      */
-    @SqlQuery("SELECT user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile, user_country, user_state, user_city_town FROM sellme_db.user_master WHERE user_id=:userId OR user_mobile=:userMobile OR user_email=:userEmail")
+    @SqlQuery("SELECT user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile, user_country, user_state, user_city_town, user_creation_date FROM sellme_db.user_master WHERE user_id=:userId OR user_mobile=:userMobile OR user_email=:userEmail")
     @Mapper(UserMapper.class)
     List<User> getUserByUserIdOrMobileNumberOrEmail(@BindBean User user);
 
+    /**
+     * The following method will return the existing user for the passed
+     * parameters.
+     * 
+     * @param user
+     * @return
+     */
+    @SqlQuery("SELECT user_id, user_role, user_status, user_name, user_address, user_subscription_type, user_email, user_mobile, user_country, user_state, user_city_town, user_creation_date, user_subscription_end_date FROM sellme_db.user_master WHERE user_id=:userId")
+    @Mapper(UserMapper.class)
+    User getUserByUserId(@Bind("userId") String userId);
+    
     /**
      * @param login
      */

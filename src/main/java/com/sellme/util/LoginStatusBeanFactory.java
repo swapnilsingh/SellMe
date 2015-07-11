@@ -29,6 +29,10 @@ public class LoginStatusBeanFactory {
                 getInvalidCredentialsStatusBean());
         loginStatusBeans.put(LoginStatus.USER_DISABLED,
                 getUserDisabledStatusBean());
+        loginStatusBeans.put(LoginStatus.USER_SUBSCRIPTION_ENDED,
+                getUserSubscriptionStatusBean());
+        loginStatusBeans.put(LoginStatus.INVALID_USER_ROLE,
+                getUserRoleStatusBean());
     }
 
     private LoginStatusBeanFactory() {
@@ -81,11 +85,30 @@ public class LoginStatusBeanFactory {
     }
 
     /**
- * 
- */
+     * @return
+     */
     private static StatusBean getUserExistanceStatusBean() {
         StatusBean statusBean = new StatusBean();
         statusBean.setMessage("User does not exists");
+        statusBean.setStatus(Status.UNSUCCESSFUL);
+        return statusBean;
+    }
+
+    /**
+     * @return
+     */
+    private static StatusBean getUserSubscriptionStatusBean() {
+        StatusBean statusBean = new StatusBean();
+        statusBean.setMessage("User Subscription Ended!");
+        statusBean.setStatus(Status.UNSUCCESSFUL);
+        return statusBean;
+    }
+    /**
+     * @return
+     */
+    private static StatusBean getUserRoleStatusBean() {
+        StatusBean statusBean = new StatusBean();
+        statusBean.setMessage("Invalid User Role!");
         statusBean.setStatus(Status.UNSUCCESSFUL);
         return statusBean;
     }

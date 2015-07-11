@@ -38,6 +38,8 @@ public class UserMapper implements ResultSetMapper<User> {
         user.setCountry(resultSet.getInt("user_country"));
         user.setState(resultSet.getLong("user_state"));
         user.setCityOrTown(resultSet.getLong("user_city_town"));
+        user.setUserCreationDate(resultSet.getDate("user_creation_date"));
+        user.setUserSubscriptionEndDate(resultSet.getDate("user_subscription_end_date"));
         return user;
     }
 

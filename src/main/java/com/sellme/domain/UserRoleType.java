@@ -30,6 +30,15 @@ public enum UserRoleType {
         }
         return userRoleType;
     }
+    public static boolean isValidUserRoleType(int value){
+        boolean isvalidRole = false;
+        for(UserRoleType userRoleType:values()){
+            if(userRoleType.value==value){
+                isvalidRole=true;
+            }
+        }
+        return isvalidRole;
+    }
 
     public final int getValue() {
         return value;

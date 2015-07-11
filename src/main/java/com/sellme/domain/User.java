@@ -3,6 +3,8 @@
  */
 package com.sellme.domain;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,6 +26,8 @@ public class User {
     private long cityOrTown;
     private int country;
     private String password;
+    private Date userCreationDate = new Date();
+    private Date userSubscriptionEndDate;
 
     @JsonProperty
     public final String getUserId() {
@@ -135,7 +139,32 @@ public class User {
     public final void setPassword(String password) {
         this.password = password;
     }
+    
+    @JsonProperty
+    public Date getUserCreationDate() {
+        return userCreationDate;
+    }
 
+    public void setUserCreationDate(Date userCreationDate) {
+        this.userCreationDate = userCreationDate;
+    }
+
+    @JsonProperty
+    public Date getUserSubscriptionEndDate() {
+        return userSubscriptionEndDate;
+    }
+
+    public void setUserSubscriptionEndDate(Date userSubscriptionEndDate) {
+        this.userSubscriptionEndDate = userSubscriptionEndDate;
+    }
+    
+    @JsonProperty
+    public void setUserSubscriptionDate(){
+        setUserSubscriptionEndDate(UserSubscriptionType.getSubscriptionEndDate(
+                this.getUserCreationDate(),
+                UserSubscriptionType.getUserSubscriptionType(this
+                        .getUserSubscriptionType())));
+    }
     @JsonIgnore
     public int getUserStatus() {
         return isUserStatus() ? 1 : 0;
